@@ -1,14 +1,13 @@
 package org.deftserver.deftweb.client;
 
+import org.deftserver.deftweb.client.tabs.metrics.MetricsTab;
+
+import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.Scroll;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.TabItem;
 import com.extjs.gxt.ui.client.widget.TabPanel;
 import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
@@ -22,7 +21,7 @@ public class Deftweb implements EntryPoint {
 	public void onModuleLoad() {
 		VerticalPanel vp = new VerticalPanel();  
 		vp.setSpacing(10);  
-
+		vp.setHorizontalAlign(HorizontalAlignment.CENTER);
 		TabPanel panel = new TabPanel();  
 		panel.setPlain(true);  
 		panel.setSize(850, 850); 
@@ -38,15 +37,9 @@ public class Deftweb implements EntryPoint {
 		//ajax1.setAutoLoad(new RequestBuilder(RequestBuilder.GET, GWT.getHostPageBaseURL() + "data/ajax1.html"));  
 		panel.add(ajax1);  
 
-		TabItem eventTab = new TabItem("Yet another Tab");  
-		eventTab.addListener(Events.Select, new Listener<ComponentEvent>() {  
-			public void handleEvent(ComponentEvent be) {  
-				Window.alert("Event Tab Was Selected");  
-			}  
-		});  
-		eventTab.addStyleName("pad-text");  
-		eventTab.addText("I am tab 4's content. I also have an event listener attached.");  
-		panel.add(eventTab);  
+		TabItem metricsTab = new MetricsTab("Metrics");  
+		metricsTab.addStyleName("pad-text");  
+		panel.add(metricsTab);  
 
 		vp.add(panel);  
 		RootPanel.get("sendButtonContainer").add(vp);
