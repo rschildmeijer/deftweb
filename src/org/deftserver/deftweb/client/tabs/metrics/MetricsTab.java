@@ -6,8 +6,8 @@ import com.google.gwt.user.client.ui.HTML;
 
 public class MetricsTab extends TabItem {
 
-	public MetricsTab(String title) {
-		super(title);
+	public MetricsTab() {
+		super("Metrics");
 		VerticalPanel panel = new VerticalPanel();
 		panel.setSpacing(10);
 		

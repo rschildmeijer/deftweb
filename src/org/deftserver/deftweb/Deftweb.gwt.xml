@@ -10,6 +10,7 @@
   <inherits name='com.google.gwt.http.HTTP'/>
   <inherits name='com.google.gwt.json.JSON'/>  
   <inherits name='com.extjs.gxt.ui.GXT'/>
+  <inherits name='com.extjs.gxt.charts.Chart'/>
   <inherits name='com.smartgwt.SmartGwt'/>
   <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
   <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->

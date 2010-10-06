@@ -1,5 +1,6 @@
 package org.deftserver.deftweb.client;
 
+import org.deftserver.deftweb.client.tabs.documentation.DocumentationTab;
 import org.deftserver.deftweb.client.tabs.metrics.MetricsTab;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
@@ -26,10 +27,10 @@ public class Deftweb implements EntryPoint {
 		panel.setPlain(true);  
 		panel.setSize(850, 850); 
 
-		TabItem normal = new TabItem("Documentation");  
-		normal.addStyleName("pad-text");  
-		normal.addText("Just a plain old tab");  
-		panel.add(normal);  
+		TabItem documentationTab = new DocumentationTab();  
+		documentationTab.addStyleName("pad-text");  
+		//documentationTab.addText("Just a plain old tab");  
+		panel.add(documentationTab);  
 
 		TabItem ajax1 = new TabItem("Contact");  
 		ajax1.setScrollMode(Scroll.AUTO);  
@@ -37,7 +38,7 @@ public class Deftweb implements EntryPoint {
 		//ajax1.setAutoLoad(new RequestBuilder(RequestBuilder.GET, GWT.getHostPageBaseURL() + "data/ajax1.html"));  
 		panel.add(ajax1);  
 
-		TabItem metricsTab = new MetricsTab("Metrics");  
+		TabItem metricsTab = new MetricsTab();  
 		metricsTab.addStyleName("pad-text");  
 		panel.add(metricsTab);  
 
