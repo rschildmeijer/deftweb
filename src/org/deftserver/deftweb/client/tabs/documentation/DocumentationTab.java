@@ -32,8 +32,8 @@ public class DocumentationTab extends TabItem {
 		
 		HorizontalPanel chartPanel = new HorizontalPanel();
 		chartPanel.setSpacing(20);
-		chartPanel.add(getChart("Single frontend"));
-		chartPanel.add(getChart("Nginx, 4 frontends"));
+		chartPanel.add(getChart("Single instance"));
+		chartPanel.add(getChart("Nginx, four instances"));
 		content.add(chartPanel);
 
 		add(content);
@@ -57,7 +57,7 @@ public class DocumentationTab extends TabItem {
 		XAxis xa = new XAxis();
 		xa.setLabels("label");
 		model.setXAxis(xa);
-		model.setXLegend(new Text("Concurrent requests", "font-size: 12px; font-family: Verdana; text-align: center;"));
+		model.setXLegend(new Text("Concurrent requests (keep-alive)", "font-size: 12px; font-family: Verdana; text-align: center;"));
 		
 		BarChart bar = new BarChart(BarStyle.GLASS);  
 		bar.setText("Deft");
@@ -78,7 +78,7 @@ public class DocumentationTab extends TabItem {
 		model.addChartConfig(bar);  
 
 		chart.setChartModel(model);  
-		store.add("Single frontend".equals(titleText) ? getSingleFrontendBenchmarkDataModels() : getNginxBenchmarkDataModels());
+		store.add("Single instance".equals(titleText) ? getSingleFrontendBenchmarkDataModels() : getNginxBenchmarkDataModels());
 
 		return chart;
 	}
@@ -86,11 +86,11 @@ public class DocumentationTab extends TabItem {
 	private List<BenchmarkModelData> getSingleFrontendBenchmarkDataModels() {
 		return Arrays.asList(
 				new BenchmarkModelData[] {
-						new BenchmarkModelData(16931, 2911, 5),
-						new BenchmarkModelData(16933, 2922, 10),
-						new BenchmarkModelData(16971, 2925, 15),
-						new BenchmarkModelData(16999, 2967, 20),
-						new BenchmarkModelData(17003, 3088, 25)
+						new BenchmarkModelData(23028, 3059, 5),
+						new BenchmarkModelData(22878, 3142, 10),
+						new BenchmarkModelData(22907, 3194, 15),
+						new BenchmarkModelData(22905, 3220, 20),
+						new BenchmarkModelData(23246, 3234, 25)
 				}
 		);
 	}
@@ -98,11 +98,11 @@ public class DocumentationTab extends TabItem {
 	private List<BenchmarkModelData> getNginxBenchmarkDataModels() {
 		return Arrays.asList(
 				new BenchmarkModelData[] {
-						new BenchmarkModelData(10055, 5154, 5),
-						new BenchmarkModelData(10052, 5344, 10),
-						new BenchmarkModelData(10049, 5765, 15),
-						new BenchmarkModelData(10065, 5984, 20),
-						new BenchmarkModelData(10570, 6459, 25)
+						new BenchmarkModelData(9284, 5578, 5),
+						new BenchmarkModelData(11955, 6143, 10),
+						new BenchmarkModelData(13336, 6393, 15),
+						new BenchmarkModelData(13845, 6563, 20),
+						new BenchmarkModelData(13730, 6664, 25)
 				}
 		);
 	}
