@@ -8,7 +8,10 @@ import com.extjs.gxt.charts.client.model.BarDataProvider;
 import com.extjs.gxt.charts.client.model.ChartModel;
 import com.extjs.gxt.charts.client.model.Legend;
 import com.extjs.gxt.charts.client.model.ScaleProvider;
+import com.extjs.gxt.charts.client.model.Text;
 import com.extjs.gxt.charts.client.model.Legend.Position;
+import com.extjs.gxt.charts.client.model.axis.XAxis;
+import com.extjs.gxt.charts.client.model.axis.YAxis;
 import com.extjs.gxt.charts.client.model.charts.BarChart;
 import com.extjs.gxt.charts.client.model.charts.BarChart.BarStyle;
 import com.extjs.gxt.ui.client.store.ListStore;
@@ -48,7 +51,16 @@ public class DocumentationTab extends TabItem {
 		model.setLegend(new Legend(Position.TOP, true));  
 		model.setScaleProvider(ScaleProvider.ROUNDED_NEAREST_SCALE_PROVIDER);  
 
+		YAxis ya = new YAxis();
+		model.setYAxis(ya);
+		
+		XAxis xa = new XAxis();
+		xa.setLabels("label");
+		model.setXAxis(xa);
+		model.setXLegend(new Text("Concurrent requests", "font-size: 12px; font-family: Verdana; text-align: center;"));
+		
 		BarChart bar = new BarChart(BarStyle.GLASS);  
+		bar.setText("Deft");
 		bar.setColour("#00aa00");  
 		bar.setTooltip("Deft: #val# requests/sec");
 		BarDataProvider barProvider = new BarDataProvider("deft", "c");  
@@ -57,6 +69,7 @@ public class DocumentationTab extends TabItem {
 		model.addChartConfig(bar);  
 
 		bar = new BarChart(BarStyle.GLASS);  
+		bar.setText("Tornado");
 		bar.setColour("#0000cc");  
 		bar.setTooltip("Tornado: #val# requests/sec");
 		barProvider = new BarDataProvider("tornado");  
@@ -74,7 +87,10 @@ public class DocumentationTab extends TabItem {
 		return Arrays.asList(
 				new BenchmarkModelData[] {
 						new BenchmarkModelData(16931, 2911, 5),
-						new BenchmarkModelData(17003, 3064, 25)
+						new BenchmarkModelData(16933, 2922, 10),
+						new BenchmarkModelData(16971, 2925, 15),
+						new BenchmarkModelData(16999, 2967, 20),
+						new BenchmarkModelData(17003, 3088, 25)
 				}
 		);
 	}
@@ -83,6 +99,9 @@ public class DocumentationTab extends TabItem {
 		return Arrays.asList(
 				new BenchmarkModelData[] {
 						new BenchmarkModelData(10055, 5154, 5),
+						new BenchmarkModelData(10052, 5344, 10),
+						new BenchmarkModelData(10049, 5765, 15),
+						new BenchmarkModelData(10065, 5984, 20),
 						new BenchmarkModelData(10570, 6459, 25)
 				}
 		);
