@@ -99,14 +99,14 @@ public class DocumentationTab extends TabItem {
 			    "        server.listen(8080).getIOLoop().start();<br>" +
 			    "    }<br>" +
 			    "</pre></code>" +
-			    "By annotating the get method with the <i>org.deft.web.Asynchronous</i> annotation you tell Deft that the <br>" +
+			    "By annotating the get method with the <i>org.deftserver.web.Asynchronous</i> annotation you tell Deft that the <br>" +
 			    "request is not finished when the get method returns.<br>" +
 			    "When the asynchronous database client eventually calls the callback (i.e. onSuccess(String result)), <br>" +
 			    "the request is still open, and the response is finally flushed to the client with the call to response.finish()." +
-				"<br><br><h3>Comparison</h3>"+
-				"The following benchmark was done using apache benchmark (man ab) which is an HTTP server benchmarking tool. " +
-				"<br> Tornado 1.1, node.js 0.2.3, nginx 0.8.52, python 2.6.1, java 1.6.0_20 where used." + 
-				"<br>The tests were executed on a 2.66ghz i7 quad core with 4gb running Mac OS X 10.6.4" +
+				"<br><br><br><h3>Comparison</h3>"+
+				"The following benchmark was done using Apache benchmark (man ab) which is an HTTP server benchmarking tool. " +
+				"<br> Tornado 1.1, node.js 0.2.3, nginx 0.8.52, python 2.6.1, java 1.6.0_20 were used." + 
+				"<br>The tests were executed on a 2.66ghz i7 quad core with 4gb running mac OS X 10.6.4" +
 				"<br>The first chart shows the result when running a single fronted/instance of each server, and for the second chart we used nginx as" +
 				"<br>a reverse proxy and loadbalancer, and had four instances of each server running for each test." +
 				"<br>The command executed (for both charts) was:<br><br>" +
