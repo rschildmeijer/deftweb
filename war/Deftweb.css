@@ -36,6 +36,28 @@ h1 {
 
 /** from ts */
 
+/** from ts */
+body {
+  background: white;
+  color: black;
+  font-family: Georgia, serif;
+  font-size: 11pt;
+  margin: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: Calibri, sans-serif;
+  margin: 0;
+}
+
+img {
+  border: 0;
+}
 
 pre,
 code {
@@ -137,4 +159,3 @@ td {
   margin-bottom: 1em;
   align: left;
 }
-
