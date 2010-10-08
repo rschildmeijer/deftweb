@@ -9,11 +9,13 @@ public class BenchmarkModelData implements ModelData {
 
 	private final Integer deft;
 	private final Integer tornado;
+	private final Integer nodejs;
 	private final Integer concurrent;
 	
-	public BenchmarkModelData(int d, int t, int c) {
+	public BenchmarkModelData(int d, int t, int n, int c) {
 		deft = d;
 		tornado = t;
+		nodejs = n;
 		concurrent = c;
 	}
 	
@@ -23,6 +25,8 @@ public class BenchmarkModelData implements ModelData {
 			return (X) deft; 		// y value
 		} else if (property.equals("tornado")){
 			return (X) tornado;		// y value
+		} else if (property.equals("node.js")) {
+			return (X) nodejs;		// y value
 		} else {
 			return (X) concurrent;	// label
 		}

@@ -76,6 +76,15 @@ public class DocumentationTab extends TabItem {
 		barProvider.bind(store);  
 		bar.setDataProvider(barProvider);  
 		model.addChartConfig(bar);  
+		
+		bar = new BarChart(BarStyle.GLASS);  
+		bar.setText("node.js");
+		bar.setColour("#ff00cc");  
+		bar.setTooltip("node.js: #val# requests/sec");
+		barProvider = new BarDataProvider("node.js");  
+		barProvider.bind(store);  
+		bar.setDataProvider(barProvider);  
+		model.addChartConfig(bar); 
 
 		chart.setChartModel(model);  
 		store.add("Single instance".equals(titleText) ? getSingleFrontendBenchmarkDataModels() : getNginxBenchmarkDataModels());
@@ -86,11 +95,11 @@ public class DocumentationTab extends TabItem {
 	private List<BenchmarkModelData> getSingleFrontendBenchmarkDataModels() {
 		return Arrays.asList(
 				new BenchmarkModelData[] {
-						new BenchmarkModelData(23028, 3059, 5),
-						new BenchmarkModelData(22878, 3142, 10),
-						new BenchmarkModelData(22907, 3194, 15),
-						new BenchmarkModelData(22905, 3220, 20),
-						new BenchmarkModelData(23246, 3234, 25)
+						new BenchmarkModelData(23028, 3059, 10629, 5),
+						new BenchmarkModelData(22878, 3142, 11039, 10),
+						new BenchmarkModelData(22907, 3194, 11218, 15),
+						new BenchmarkModelData(22905, 3220, 11520, 20),
+						new BenchmarkModelData(23246, 3234, 11510, 25)
 				}
 		);
 	}
@@ -98,11 +107,11 @@ public class DocumentationTab extends TabItem {
 	private List<BenchmarkModelData> getNginxBenchmarkDataModels() {
 		return Arrays.asList(
 				new BenchmarkModelData[] {
-						new BenchmarkModelData(9284, 5578, 5),
-						new BenchmarkModelData(11955, 6143, 10),
-						new BenchmarkModelData(13336, 6393, 15),
-						new BenchmarkModelData(13845, 6563, 20),
-						new BenchmarkModelData(13730, 6664, 25)
+						new BenchmarkModelData(9284, 5578, 0, 5),
+						new BenchmarkModelData(11955, 6143, 0, 10),
+						new BenchmarkModelData(13336, 6393, 0, 15),
+						new BenchmarkModelData(13845, 6563, 0, 20),
+						new BenchmarkModelData(13730, 6664, 0, 25)
 				}
 		);
 	}
