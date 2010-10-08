@@ -17,8 +17,10 @@ import com.extjs.gxt.charts.client.model.charts.BarChart.BarStyle;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.TabItem;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 public class DocumentationTab extends TabItem {
 
@@ -27,44 +29,119 @@ public class DocumentationTab extends TabItem {
 
 	public DocumentationTab() {
 		super("Documentation");
-		content.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		content.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
 		content.setSpacing(10);
-		
+
 		HorizontalPanel chartPanel = new HorizontalPanel();
 		chartPanel.setSpacing(20);
 		chartPanel.add(getChart("Single instance"));
 		chartPanel.add(getChart("Nginx, four instances"));
-		content.add(chartPanel);
 
+		content.add(getInitialHtml());
+		content.add(chartPanel);
 		add(content);
 	}
-	
+
+	private Widget getInitialHtml() {
+		//		<h2>Download and install</h2>
+		//		  <p><b>Download:</b> <a href="http://github.com/downloads/facebook/tornado/tornado-1.1.tar.gz">tornado-1.1.tar.gz</a></p>
+		//		  <pre><code>tar xvzf tornado-1.1.tar.gz
+		//		cd tornado-1.1
+		//		python setup.py build
+		//		sudo python setup.py install</code></pre>
+		return new HTML(
+				"<br><br><h3>Overview</h3>" +
+				"The Deft web server is an open source projected (licensed under <a href=\"http://www.apache.org/licenses/LICENSE-2.0.html\">Apache version 2</a>). Deft was intitially inspired by <a href=\"http://github.com/facebook/tornado\">facebook/tornado</a>." +
+				"<br>Deft is a single threaded, asynchronous, event driven high performance web server running on the JVM." +
+				"<br><b>Source and issue tracker:</b> <a href=\"http://github.com/rschildmeijer/deft\">http://github.com/rschildmeijer/deft</a>" + 
+				"<br><br><h3>Features</h3>" +
+				" <i>* Specialized and optimized for thousands of simultaneous connections.</i> (<a href=\"http://en.wikipedia.org/wiki/C10k_problem\">C10k</a>) (<a href=\"http://blog.urbanairship.com/blog/2010/08/24/c500k-in-action-at-urban-airship/\">C500k</a>)" +
+				"<br> <i>* Using pure Java NIO</i> (<a href=\"http://download.oracle.com/javase/6/docs/api/java/nio/package-summary.html\">java.nio</a> & <a href=\"http://download.oracle.com/javase/6/docs/api/java/nio/channels/package-summary.html\">java.nio.channels</a>)" +
+				"<br> *<i> Asynchronous (nonblocking I/O)</i>" +
+				"<br><br><h3>Getting started</h3>" +
+				"<p><b>Download:</b> <a href=\"http://github.com/downloads/rschildmeijer/deft/deft-0.1.0.tar.gz\">deft-0.1.0.tar.gz</a></p>" +
+				"<br><pre><code>    tar xvzf deft-0.1.0.tar.gz<br>" +
+				"</code></pre><br>" +
+				"<h3>Hello world (synchronous)</h3>" +
+				"<pre><code>" +
+				"    class SynchronousRequestHandler extends RequestHandler {<br>" +
+				//"   <br>" +
+				"         &#064;Override<br> " +
+				"        public void get(HttpRequest request, HttpResponse response) {<br>" +
+                "            response.write(\"hello world!\");<br>" +
+    			"         }<br>"+
+    			//" <br>" +
+				"    }<br>" +
+				"<br>" +
+				"    public static void main(String[] args) {<br>" +
+				"        Map&#060;String, RequestHandler&#062; handlers = new HashMap&#060;String, RequestHandler&#062;();<br>" +
+				"        handlers.put(\"/\", new SynchronousRequestHandler());<br>" + 
+				"        HttpServer server = new HttpServer(new Application(handlers));<br>" +
+				"        server.listen(8080).getIOLoop().start();<br>" +
+				"     }<br>" +
+				"</pre></code>" +
+				"<br><h3>Hello world (asynchronous)</h3>"+ 
+				"<pre><code>" +
+			    "    class AsynchronousRequestHandler extends RequestHandler {<br>" +
+			    "        &#064;Override<br>" +
+			    "        &#064;Asynchronous<br>" +
+			    "        public void get(HttpRequest request, final HttpResponse response) {<br>" +
+			    "            response.write(\"hello \");<br>" + 
+			    "            db.asyncIdentityGet(\"world\", new AsyncCallback&#060;String&#062;() {<br>" +
+			    "                public void onSuccess(String result) { response.write(result).finish(); }<br>" +
+			    "            });<br>" +
+			    "        }<br>" +
+			    "    }<br<br>" +
+			    "    public static void main(String[] args) {<br>" +
+			    "        Map&#060;String, RequestHandler&#062; handlers = new HashMap&#060;String, RequestHandler&#062;();<br>" +
+			    "        handlers.put(\"/\", new AsynchronousRequestHandler());<br>" +
+			    "        HttpServer server = new HttpServer(new Application(handlers));<br>" +
+			    "        server.listen(8080).getIOLoop().start();<br>" +
+			    "    }<br>" +
+			    "</pre></code>" +
+			    "By annotating the get method with the <i>org.deft.web.Asynchronous</i> annotation you tell Deft that the <br>" +
+			    "request is not finished when the get method returns.<br>" +
+			    "When the asynchronous database client eventually calls the callback (i.e. onSuccess(String result)), <br>" +
+			    "the request is still open, and the response is finally flushed to the client with the call to response.finish()." +
+				"<br><br><h3>Comparison</h3>"+
+				"The following benchmark was done using apache benchmark (man ab) which is an HTTP server benchmarking tool. " +
+				"<br> Tornado 1.1, node.js 0.2.3, nginx 0.8.52, python 2.6.1, java 1.6.0_20 where used." + 
+				"<br>The tests were executed on a 2.66ghz i7 quad core with 4gb running Mac OS X 10.6.4" +
+				"<br>The first chart shows the result when running a single fronted/instance of each server, and for the second chart we used nginx as" +
+				"<br>a reverse proxy and loadbalancer, and had four instances of each server running for each test." +
+				"<br>The command executed (for both charts) was:<br><br>" +
+				"<pre><code>    ab -k -c[5, 10, 15, 20, 25] -n80000</pre></code>" +
+				"<br>"
+		);
+	}
+// nginx 0.8.52
+	// python 2.6.1
 	private Chart getChart(String titleText) {
 		Chart chart = new Chart("resources/chart/open-flash-chart.swf");
 		ListStore<BenchmarkModelData> store = new ListStore<BenchmarkModelData>(); 
-		
+
 		chart.setSize("380", "260");
 
 		ChartModel model = new ChartModel(titleText,  
-			"font-size: 14px; font-family: Verdana; text-align: center;");  
+		"font-size: 14px; font-family: Verdana; text-align: center;");  
 		model.setBackgroundColour("#fefefe");  
 		model.setLegend(new Legend(Position.TOP, true));  
 		model.setScaleProvider(ScaleProvider.ROUNDED_NEAREST_SCALE_PROVIDER);  
 
 		YAxis ya = new YAxis();
 		model.setYAxis(ya);
-		
+
 		XAxis xa = new XAxis();
 		xa.setLabels("label");
 		model.setXAxis(xa);
 		model.setXLegend(new Text("Concurrent requests (keep-alive)", "font-size: 12px; font-family: Verdana; text-align: center;"));
-		
+
 		BarChart bar = new BarChart(BarStyle.GLASS);  
 		bar.setText("Deft");
 		bar.setColour("#00aa00");  
 		bar.setTooltip("Deft: #val# requests/sec");
 		BarDataProvider barProvider = new BarDataProvider("deft", "c");  
-		barProvider.bind(store);  
+		barProvider.bind(store);
 		bar.setDataProvider(barProvider);  
 		model.addChartConfig(bar);  
 
@@ -76,7 +153,7 @@ public class DocumentationTab extends TabItem {
 		barProvider.bind(store);  
 		bar.setDataProvider(barProvider);  
 		model.addChartConfig(bar);  
-		
+
 		bar = new BarChart(BarStyle.GLASS);  
 		bar.setText("node.js");
 		bar.setColour("#ff00cc");  
@@ -103,15 +180,15 @@ public class DocumentationTab extends TabItem {
 				}
 		);
 	}
-	
+
 	private List<BenchmarkModelData> getNginxBenchmarkDataModels() {
 		return Arrays.asList(
 				new BenchmarkModelData[] {
-						new BenchmarkModelData(9284, 5578, 0, 5),
-						new BenchmarkModelData(11955, 6143, 0, 10),
-						new BenchmarkModelData(13336, 6393, 0, 15),
-						new BenchmarkModelData(13845, 6563, 0, 20),
-						new BenchmarkModelData(13730, 6664, 0, 25)
+						new BenchmarkModelData(9284, 5578, 9304, 5),
+						new BenchmarkModelData(11955, 6143, 9226, 10),
+						new BenchmarkModelData(13336, 6393, 9314, 15),
+						new BenchmarkModelData(13845, 6563, 9637, 20),
+						new BenchmarkModelData(13730, 6664, 9713, 25)
 				}
 		);
 	}
