@@ -34,8 +34,8 @@ public class DocumentationTab extends TabItem {
 
 		HorizontalPanel chartPanel = new HorizontalPanel();
 		chartPanel.setSpacing(20);
-		chartPanel.add(getChart("Single instance"));
-		chartPanel.add(getChart("Nginx, four instances"));
+		chartPanel.add(getChart("Single instance", "Concurrent requests (keep-alive)"));
+		chartPanel.add(getChart("Nginx, four instances", "Concurrent requests (no keep-alive)"));
 
 		content.add(getInitialHtml());
 		content.add(chartPanel);
@@ -116,7 +116,7 @@ public class DocumentationTab extends TabItem {
 	}
 // nginx 0.8.52
 	// python 2.6.1
-	private Chart getChart(String titleText) {
+	private Chart getChart(String titleText, String xLegendText) {
 		Chart chart = new Chart("resources/chart/open-flash-chart.swf");
 		ListStore<BenchmarkModelData> store = new ListStore<BenchmarkModelData>(); 
 
@@ -134,7 +134,7 @@ public class DocumentationTab extends TabItem {
 		XAxis xa = new XAxis();
 		xa.setLabels("label");
 		model.setXAxis(xa);
-		model.setXLegend(new Text("Concurrent requests (keep-alive)", "font-size: 12px; font-family: Verdana; text-align: center;"));
+		model.setXLegend(new Text(xLegendText, "font-size: 12px; font-family: Verdana; text-align: center;"));
 
 		BarChart bar = new BarChart(BarStyle.GLASS);  
 		bar.setText("Deft");

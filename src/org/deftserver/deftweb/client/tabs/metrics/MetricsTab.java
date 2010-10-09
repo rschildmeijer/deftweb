@@ -13,7 +13,7 @@ public class MetricsTab extends TabItem {
 		
 		HTML commitText = new HTML("<h1>The latest commits on the 'master' branch</h1>");
 		panel.add(commitText);
-		panel.add(new CommitCalendar());
+		//panel.add(new CommitCalendar());
 		add(panel);
 	}
 
