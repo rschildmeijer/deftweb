@@ -55,7 +55,7 @@ public class DocumentationTab extends TabItem {
 				"<br><br><br><h3>Getting started</h3>" +
 				"<p><a href=\"http://github.com/downloads/rschildmeijer/deft/deft-0.1.0-binary-with-deps.zip\"> deft-0.1.0-binary-with-deps.zip</a> (recommended)<br>" +
 				"<a href=\"http://github.com/downloads/rschildmeijer/deft/deft-0.1.0-binary.zip\">deft-0.1.0-binary.zip</a></p>" +
-				"<br><pre><code>    unzip xvzf deft-0.1.0.tar.gz<br>" +
+				"<br><pre><code>    unzip deft-0.1.0-binary-with-deps.zip<br>" +
 				"</code></pre><br>" +
 				"<h3>Hello world (synchronous)</h3>" +
 				"<pre><code>" +
