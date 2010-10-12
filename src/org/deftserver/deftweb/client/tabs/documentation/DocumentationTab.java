@@ -127,12 +127,13 @@ public class DocumentationTab extends TabItem {
 			    "<pre></code>    java -Dlogback.configurationFile=/path/to/config.xml com.my.DeftServer</pre></code>"+
 			    "<br><br><br><h3>Comparison</h3>"+
 				"The following benchmark was done using Apache benchmark (man ab) which is an HTTP server benchmarking tool. " +
-				"<br> Tornado 1.1, node.js 0.2.3, nginx 0.8.52, python 2.6.1, java 1.6.0_20 were used." + 
-				"<br>The tests were executed on a 2.66ghz i7 quad core with 4gb running mac OS X 10.6.4" +
+				"<br> Deft 0.1.0, Tornado 1.1, node.js 0.2.3, nginx 0.8.52, python 2.6.1, java 1.6.0_20 were used." + 
+				"<br>The tests (hello world) were executed on a 2.66ghz i7 quad core with 4gb running mac OS X 10.6.4" +
 				"<br>The first chart shows the result when running a single fronted/instance of each server, and for the second chart we used nginx as" +
 				"<br>a reverse proxy and loadbalancer, and had four instances of each server running for each test." +
+				"<br>Each individual number (bar) is the median of five consecutive runs." +
 				"<br>The command executed (for both charts) was:<br><br>" +
-				"<pre><code>    ab -k -c[5, 10, 15, 20, 25] -n80000 http://127.0.0.1/</pre></code>" +
+				"<pre><code>    ab -k -c[5, 10, 15, 20, 25] -n800000 http://127.0.0.1/</pre></code>" +
 				"<br>"
 		);
 	}
@@ -194,11 +195,11 @@ public class DocumentationTab extends TabItem {
 	private List<BenchmarkModelData> getSingleFrontendBenchmarkDataModels() {
 		return Arrays.asList(
 				new BenchmarkModelData[] {
-						new BenchmarkModelData(23028, 3059, 10629, 5),
-						new BenchmarkModelData(22878, 3142, 11039, 10),
-						new BenchmarkModelData(22907, 3194, 11218, 15),
-						new BenchmarkModelData(22905, 3220, 11520, 20),
-						new BenchmarkModelData(23246, 3234, 11510, 25)
+						new BenchmarkModelData(28020, 3059, 10629, 5),
+						new BenchmarkModelData(28704, 3142, 11039, 10),
+						new BenchmarkModelData(28805, 3194, 11218, 15),
+						new BenchmarkModelData(28847, 3220, 11520, 20),
+						new BenchmarkModelData(29026, 3234, 11510, 25)
 				}
 		);
 	}
