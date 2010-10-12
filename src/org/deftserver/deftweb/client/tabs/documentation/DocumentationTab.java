@@ -53,8 +53,9 @@ public class DocumentationTab extends TabItem {
 				"<br> <i>* Using pure Java NIO</i> (<a href=\"http://download.oracle.com/javase/6/docs/api/java/nio/package-summary.html\">java.nio</a> & <a href=\"http://download.oracle.com/javase/6/docs/api/java/nio/channels/package-summary.html\">java.nio.channels</a>)" +
 				"<br> *<i> Asynchronous (nonblocking I/O)</i>" +
 				"<br><br><br><h3>Getting started</h3>" +
-				"<p><b>Download:</b> <a href=\"http://github.com/downloads/rschildmeijer/deft/deft-0.1.0.tar.gz\">deft-0.1.0.tar.gz</a> (expected to be ready next week (18-24 oct 2010))</p>" +
-				"<br><pre><code>    tar xvzf deft-0.1.0.tar.gz<br>" +
+				"<p><a href=\"http://github.com/downloads/rschildmeijer/deft/deft-0.1.0-binary-with-deps.zip\"> deft-0.1.0-binary-with-deps.zip</a> (recommended)<br>" +
+				"<a href=\"http://github.com/downloads/rschildmeijer/deft/deft-0.1.0-binary.zip\">deft-0.1.0-binary.zip</a></p>" +
+				"<br><pre><code>    unzip xvzf deft-0.1.0.tar.gz<br>" +
 				"</code></pre><br>" +
 				"<h3>Hello world (synchronous)</h3>" +
 				"<pre><code>" +
