@@ -45,7 +45,7 @@ public class DocumentationTab extends TabItem {
 	private Widget getInitialHtml() {
 		return new HTML(
 				"<br><br><h3>Overview</h3>" +
-				"Deft web server is an open source projected (licensed under <a href=\"http://www.apache.org/licenses/LICENSE-2.0.html\">Apache version 2</a>). Deft was intitially inspired by <a href=\"http://github.com/facebook/tornado\">facebook/tornado</a>." +
+				"Deft is an open source web server (licensed under <a href=\"http://www.apache.org/licenses/LICENSE-2.0.html\">Apache version 2</a>). Deft was intitially inspired by <a href=\"http://github.com/facebook/tornado\">facebook/tornado</a>." +
 				"<br>Deft is a single threaded, asynchronous, event driven high performance web server running on the JVM." +
 				"<br><b>Source and issue tracker:</b> <a href=\"http://github.com/rschildmeijer/deft\">http://github.com/rschildmeijer/deft</a>" + 
 				"<br><br><br><h3>Features</h3>" +
@@ -53,9 +53,9 @@ public class DocumentationTab extends TabItem {
 				"<br> <i>* Using pure Java NIO</i> (<a href=\"http://download.oracle.com/javase/6/docs/api/java/nio/package-summary.html\">java.nio</a> & <a href=\"http://download.oracle.com/javase/6/docs/api/java/nio/channels/package-summary.html\">java.nio.channels</a>)" +
 				"<br> *<i> Asynchronous (nonblocking I/O)</i>" +
 				"<br><br><br><h3>Getting started</h3>" +
-				"<p><a href=\"http://github.com/downloads/rschildmeijer/deft/deft-0.1.0-binary-with-deps.zip\"> deft-0.1.0-binary-with-deps.zip</a> (recommended)<br>" +
-				"<a href=\"http://github.com/downloads/rschildmeijer/deft/deft-0.1.0-binary.zip\">deft-0.1.0-binary.zip</a></p>" +
-				"<br><pre><code>    unzip deft-0.1.0-binary-with-deps.zip<br>" +
+				"<p><a href=\"http://github.com/downloads/rschildmeijer/deft/deft-0.1.1-binary-with-deps.zip\"> deft-0.1.1-binary-with-deps.zip</a> (recommended)<br>" +
+				"<a href=\"http://github.com/downloads/rschildmeijer/deft/deft-0.1.1-binary.zip\">deft-0.1.1-binary.zip</a></p>" +
+				"<br><pre><code>    unzip deft-0.1.1-binary-with-deps.zip<br>" +
 				"</code></pre><br>" +
 				"<h3>Hello world (synchronous)</h3>" +
 				"<pre><code>" +
@@ -112,9 +112,9 @@ public class DocumentationTab extends TabItem {
 			    "    }<br>" +
 			    "</pre></code>" +
 			    "The code above creates a \"dynamic mapping\" to the group capturing request handler (CapturingRequestHandler).<br>" +
-			    "This type of mapping is convenient when creating e.g. RESTful web services where you usually address your <br>" +
-			    "resources with the path segment instead of using get parameters. The mapping above will \"capture\" all <br>" + 
-			    "requests made against urls that start with \"/persons/\" and ends with a (positive) number, e.g. \"/persons/1911\" or \"/persons/42\". <br>" +
+			    "This type of mapping is convenient when creating e.g. RESTful web services resources with the path segment instead of <br >" +
+			    "using get parameters. The mapping above will \"capture\" all requests made against urls that start with \"/persons/\" <br>" +
+			    "and ends with a (positive) number, e.g. \"/persons/1911\" or \"/persons/42\". <br>" +
 			    "Capturing groups can only be used as the last url path segment like the example above. <br>" +
 			    "It's (currently) not possible to have more than one capturing within one \"dynamic mapping\".<br>" +
 			    "<br><br><h3>Logging</h3>" +

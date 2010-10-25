@@ -2,7 +2,6 @@ package org.deftserver.deftweb.client;
 
 import org.deftserver.deftweb.client.tabs.contact.ContactTab;
 import org.deftserver.deftweb.client.tabs.documentation.DocumentationTab;
-import org.deftserver.deftweb.client.tabs.metrics.MetricsTab;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.widget.TabItem;
@@ -25,7 +24,7 @@ public class Deftweb implements EntryPoint {
 		vp.setHorizontalAlign(HorizontalAlignment.CENTER);
 		TabPanel panel = new TabPanel();  
 		panel.setPlain(true);  
-		panel.setSize(850, 2050); 
+		panel.setSize(850, 2150); 
 
 		TabItem documentationTab = new DocumentationTab();  
 		documentationTab.addStyleName("pad-text");  
@@ -35,9 +34,9 @@ public class Deftweb implements EntryPoint {
 		TabItem contact = new ContactTab();  
 		panel.add(contact);  
 
-		TabItem metricsTab = new MetricsTab();  
-		metricsTab.addStyleName("pad-text");  
-		panel.add(metricsTab);  
+//		TabItem metricsTab = new MetricsTab();  
+//		metricsTab.addStyleName("pad-text");  
+//		panel.add(metricsTab);  
 
 		vp.add(panel);  
 		RootPanel.get("sendButtonContainer").add(vp);
