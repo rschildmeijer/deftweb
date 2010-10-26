@@ -106,15 +106,15 @@ public class DocumentationTab extends TabItem {
 			    "    }<br><br>" +
 			    "    public static void main(String[] args) {<br>" +
 			    "        Map&#060;String, RequestHandler&#062; handlers = new HashMap&#060;String, RequestHandler&#062;();<br>" +
-			    "        handlers.put(\"/\", new AsynchronousRequestHandler());<br>" +
+			    "        handlers.put(\"/persons/([0-9]+)\", new CapturingRequestHandler());<br>" +
 			    "        HttpServer server = new HttpServer(new Application(handlers));<br>" +
 			    "        server.listen(8080).getIOLoop().start();<br>" +
 			    "    }<br>" +
 			    "</pre></code>" +
 			    "The code above creates a \"dynamic mapping\" to the group capturing request handler (CapturingRequestHandler).<br>" +
-			    "This type of mapping is convenient when creating e.g. RESTful web services resources with the path segment instead of <br >" +
-			    "using get parameters. The mapping above will \"capture\" all requests made against urls that start with \"/persons/\" <br>" +
-			    "and ends with a (positive) number, e.g. \"/persons/1911\" or \"/persons/42\". <br>" +
+			    "This type of mapping is convenient when creating e.g. RESTful web services. The mapping above will \"capture\" all <br>" +
+			    "requests made against urls that start with \"/persons/\" and ends with a (positive) number, e.g. \"/persons/1911\"<br> " +
+			    "or \"/persons/42\". <br>" +
 			    "Capturing groups can only be used as the last url path segment like the example above. <br>" +
 			    "It's (currently) not possible to have more than one capturing within one \"dynamic mapping\".<br>" +
 			    "<br><br><h3>Logging</h3>" +
