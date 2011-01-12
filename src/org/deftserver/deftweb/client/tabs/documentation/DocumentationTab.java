@@ -53,9 +53,9 @@ public class DocumentationTab extends TabItem {
 				"<br> <i>* Using pure Java NIO</i> (<a href=\"http://download.oracle.com/javase/6/docs/api/java/nio/package-summary.html\">java.nio</a> & <a href=\"http://download.oracle.com/javase/6/docs/api/java/nio/channels/package-summary.html\">java.nio.channels</a>)" +
 				"<br> *<i> Asynchronous (nonblocking I/O)</i>" +
 				"<br><br><br><h3>Getting started</h3>" +
-				"<p><a href=\"http://github.com/downloads/rschildmeijer/deft/deft-0.1.1-binary-with-deps.zip\"> deft-0.1.1-binary-with-deps.zip</a> (recommended)<br>" +
-				"<a href=\"http://github.com/downloads/rschildmeijer/deft/deft-0.1.1-binary.zip\">deft-0.1.1-binary.zip</a></p>" +
-				"<br><pre><code>    unzip deft-0.1.1-binary-with-deps.zip<br>" +
+				"<p><a href=\"http://github.com/downloads/rschildmeijer/deft/deft-0.2.0-binary-with-deps.zip\"> deft-0.2.0-binary-with-deps.zip</a> (recommended)<br>" +
+				"<a href=\"http://github.com/downloads/rschildmeijer/deft/deft-0.2.0-binary.zip\">deft-0.2.0-binary.zip</a></p>" +
+				"<br><pre><code>    unzip deft-0.2.0-binary-with-deps.zip<br>" +
 				"</code></pre><br>" +
 				"<h3>Hello world (synchronous)</h3>" +
 				"<pre><code>" +
@@ -70,8 +70,9 @@ public class DocumentationTab extends TabItem {
 				"        Map&#060;String, RequestHandler&#062; handlers = new HashMap&#060;String, RequestHandler&#062;();<br>" +
 				"        handlers.put(\"/\", new SynchronousRequestHandler());<br>" + 
 				"        HttpServer server = new HttpServer(new Application(handlers));<br>" +
-				"        server.listen(8080).getIOLoop().start();<br>" +
-				"     }<br>" +
+				"        server.listen(8080);<br>" +
+				"        IOLoop.INSTANCE.start();<br>" +
+				"    }<br>" +
 				"</pre></code>" +
 				"<br><h3>Hello world (asynchronous)</h3>"+ 
 				"<pre><code>" +
@@ -89,7 +90,8 @@ public class DocumentationTab extends TabItem {
 			    "        Map&#060;String, RequestHandler&#062; handlers = new HashMap&#060;String, RequestHandler&#062;();<br>" +
 			    "        handlers.put(\"/\", new AsynchronousRequestHandler());<br>" +
 			    "        HttpServer server = new HttpServer(new Application(handlers));<br>" +
-			    "        server.listen(8080).getIOLoop().start();<br>" +
+			    "        server.listen(8080);<br>" +
+			    "        IOLoop.INSTANCE.start();<br>" +
 			    "    }<br>" +
 			    "</pre></code>" +
 			    "By annotating the get method with the <i>org.deftserver.web.Asynchronous</i> annotation you tell Deft that the <br>" +
@@ -108,7 +110,8 @@ public class DocumentationTab extends TabItem {
 			    "        Map&#060;String, RequestHandler&#062; handlers = new HashMap&#060;String, RequestHandler&#062;();<br>" +
 			    "        handlers.put(\"/persons/([0-9]+)\", new CapturingRequestHandler());<br>" +
 			    "        HttpServer server = new HttpServer(new Application(handlers));<br>" +
-			    "        server.listen(8080).getIOLoop().start();<br>" +
+			    "        server.listen(8080);<br>" +
+			    "        IOLoop.INSTANCE.start();<br>" +
 			    "    }<br>" +
 			    "</pre></code>" +
 			    "The code above creates a \"dynamic mapping\" to the group capturing request handler (CapturingRequestHandler).<br>" +
@@ -125,10 +128,18 @@ public class DocumentationTab extends TabItem {
 			    "or a path to a file external to the application.<br>"+
 			    "Example:<br><br>" +
 			    "<pre></code>    java -Dlogback.configurationFile=/path/to/config.xml com.my.DeftServer</pre></code>"+
+			    "<br><br><h3>Configuration</h3>"+
+			    "All configuration is made through <i>org.deftserver.web.http.HttpServerDescriptor</i>.<br>" +
+			    "Do not alter the tunables unless you know what you are doing." +
+			    "<br><br><br><h3>Monitoring</h3>"+
+			    "Deft release 0.2.0 contains an experimental JMX API (\"<i>The JMX technology provides the tools for building <br>" +
+			    "distributed, Web-based, modular and dynamic solutions for managing and monitoring devices, applications, and <br>" +
+			    "service-driven networks.</i>\").<br>" +
+			    "To monitor the Deft process you would need a JMX client like jconsole or jvisualvm. Both are shipped with modern (Oracle) JDKs." +
 			    "<br><br><br><h3>Comparison</h3>"+
-				"The following benchmark was done using Apache benchmark (man ab) which is an HTTP server benchmarking tool. " +
-				"<br> Deft 0.1.0, Tornado 1.1, node.js 0.2.3, nginx 0.8.52, python 2.6.1, java 1.6.0_20 were used." + 
-				"<br>The tests (hello world) were executed on a 2.66ghz i7 quad core with 4gb running mac OS X 10.6.4" +
+				"The following benchmark was done using <a href=\"http://httpd.apache.org/docs/2.0/programs/ab.html\">Apache benchmark</a> (man ab) which is an HTTP server benchmarking tool. " +
+				"<br> Deft 0.2.0, Tornado 1.1, node.js 0.2.3, nginx 0.8.52, python 2.6.1, java 1.6.0_22 were used." + 
+				"<br>The <a href=\"http://github.com/rschildmeijer/deft-benchmark\">tests</a> (hello world) were executed on a 2.66ghz i7 quad core with 4gb running Mac OS X 10.6.6" +
 				"<br>The first chart shows the result when running a single fronted/instance of each server, and for the second chart we used nginx as" +
 				"<br>a reverse proxy and loadbalancer, and had four instances of each server running for each test." +
 				"<br>Each individual number (bar) is the median of five consecutive runs." +
@@ -195,11 +206,11 @@ public class DocumentationTab extends TabItem {
 	private List<BenchmarkModelData> getSingleFrontendBenchmarkDataModels() {
 		return Arrays.asList(
 				new BenchmarkModelData[] {
-						new BenchmarkModelData(28020, 3059, 10629, 5),
-						new BenchmarkModelData(28704, 3142, 11039, 10),
-						new BenchmarkModelData(28805, 3194, 11218, 15),
-						new BenchmarkModelData(28847, 3220, 11520, 20),
-						new BenchmarkModelData(29026, 3234, 11510, 25)
+						new BenchmarkModelData(27482, 3059, 10629, 5),
+						new BenchmarkModelData(27884, 3142, 11039, 10),
+						new BenchmarkModelData(27891, 3194, 11218, 15),
+						new BenchmarkModelData(27935, 3220, 11520, 20),
+						new BenchmarkModelData(27973, 3234, 11510, 25)
 				}
 		);
 	}

@@ -24,7 +24,7 @@ public class Deftweb implements EntryPoint {
 		vp.setHorizontalAlign(HorizontalAlignment.CENTER);
 		TabPanel panel = new TabPanel();  
 		panel.setPlain(true);  
-		panel.setSize(850, 2150); 
+		panel.setSize(850, 2400); 
 
 		TabItem documentationTab = new DocumentationTab();  
 		documentationTab.addStyleName("pad-text");  
