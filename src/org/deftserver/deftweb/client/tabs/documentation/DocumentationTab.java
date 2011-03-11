@@ -85,7 +85,7 @@ public class DocumentationTab extends TabItem {
 			    "                public void onSuccess(String result) { response.write(result).finish(); }<br>" +
 			    "            });<br>" +
 			    "        }<br>" +
-			    "    }<br<br>" +
+			    "    }<br><br>" +
 			    "    public static void main(String[] args) {<br>" +
 			    "        Map&#060;String, RequestHandler&#062; handlers = new HashMap&#060;String, RequestHandler&#062;();<br>" +
 			    "        handlers.put(\"/\", new AsynchronousRequestHandler());<br>" +
