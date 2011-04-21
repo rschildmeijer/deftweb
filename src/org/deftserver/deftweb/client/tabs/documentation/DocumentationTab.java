@@ -53,9 +53,9 @@ public class DocumentationTab extends TabItem {
 				"<br> <i>* Using pure Java NIO</i> (<a href=\"http://download.oracle.com/javase/6/docs/api/java/nio/package-summary.html\">java.nio</a> & <a href=\"http://download.oracle.com/javase/6/docs/api/java/nio/channels/package-summary.html\">java.nio.channels</a>)" +
 				"<br> *<i> Asynchronous (nonblocking I/O)</i>" +
 				"<br><br><br><h3>Getting started</h3>" +
-				"<p><a href=\"http://github.com/downloads/rschildmeijer/deft/deft-0.2.0-binary-with-deps.zip\"> deft-0.2.0-binary-with-deps.zip</a> (recommended)<br>" +
-				"<a href=\"http://github.com/downloads/rschildmeijer/deft/deft-0.2.0-binary.zip\">deft-0.2.0-binary.zip</a></p>" +
-				"<br><pre><code>    unzip deft-0.2.0-binary-with-deps.zip<br>" +
+				"<p><a href=\"http://github.com/downloads/rschildmeijer/deft/deft-0.3.0-binary-with-deps.zip\"> deft-0.3.0-binary-with-deps.zip</a> (recommended)<br>" +
+				"<a href=\"http://github.com/downloads/rschildmeijer/deft/deft-0.3.0-binary.zip\">deft-0.3.0-binary.zip</a></p>" +
+				"<br><pre><code>    unzip deft-0.3.0-binary-with-deps.zip<br>" +
 				"</code></pre><br>" +
 				"<h3>Hello world (synchronous)</h3>" +
 				"<pre><code>" +
@@ -81,9 +81,13 @@ public class DocumentationTab extends TabItem {
 			    "        &#064;Asynchronous<br>" +
 			    "        public void get(HttpRequest request, final HttpResponse response) {<br>" +
 			    "            response.write(\"hello \");<br>" + 
-			    "            db.asyncIdentityGet(\"world\", new AsyncCallback&#060;String&#062;() {<br>" +
-			    "                public void onSuccess(String result) { response.write(result).finish(); }<br>" +
-			    "            });<br>" +
+			    "            AsynchronousHttpClient client = new AsynchronousHttpClient();<br>" +
+			    "            client.fetch(\"http://tt.se/start/\",<br>" +
+			    "                new AsyncResult&#060;HttpResponse&#062;() {<br>" +
+			    "                    public void onFailure(Throwable ignore) { }<br>" +
+			    "                    public void onSuccess(HttpResponse result) { response.write(result.getBody()).finish(); }<br>" +
+			    "                }<br>" +
+			    "            );<br>" +
 			    "        }<br>" +
 			    "    }<br><br>" +
 			    "    public static void main(String[] args) {<br>" +
@@ -96,7 +100,7 @@ public class DocumentationTab extends TabItem {
 			    "</pre></code>" +
 			    "By annotating the get method with the <i>org.deftserver.web.Asynchronous</i> annotation you tell Deft that the <br>" +
 			    "request is not finished when the get method returns.<br>" +
-			    "When the asynchronous database client eventually calls the callback (i.e. onSuccess(String result)), <br>" +
+			    "When the asynchronous http client eventually calls the callback (i.e. onSuccess(HttpResponse result)), <br>" +
 			    "the request is still open, and the response is finally flushed to the client with the call to response.finish()." +
 			    "<br><br><h3>Capturing groups with regular expressions</h3>" +
 			    "<pre><code>" +
