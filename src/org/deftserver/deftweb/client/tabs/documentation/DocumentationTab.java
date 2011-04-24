@@ -43,8 +43,7 @@ public class DocumentationTab extends TabItem {
 	}
 
 	private Widget getInitialHtml() {
-		return new HTML(
-				"<br><br><h3>Overview</h3>" +
+		String html = "<br><br><h3>Overview</h3>" +
 				"Deft is an open source web server (licensed under <a href=\"http://www.apache.org/licenses/LICENSE-2.0.html\">Apache version 2</a>). Deft was intitially inspired by <a href=\"http://github.com/facebook/tornado\">facebook/tornado</a>." +
 				"<br>Deft is a single threaded, asynchronous, event driven high performance web server running on the JVM." +
 				"<br><b>Source and issue tracker:</b> <a href=\"http://github.com/rschildmeijer/deft\">http://github.com/rschildmeijer/deft</a>" + 
@@ -62,13 +61,13 @@ public class DocumentationTab extends TabItem {
 				"    class SynchronousRequestHandler extends RequestHandler {<br><br>" +
 				"        &#064;Override<br>" +
 				"        public void get(HttpRequest request, HttpResponse response) {<br>" +
-                "            response.write(\"hello world!\");<br>" +
+                "            response.write(<font color=\"#0000FF\">\"hello world!\"</font>);<br>" +
     			"        }<br>"+
 				"    }<br>" +
 				"<br>" +
 				"    public static void main(String[] args) {<br>" +
 				"        Map&#060;String, RequestHandler&#062; handlers = new HashMap&#060;String, RequestHandler&#062;();<br>" +
-				"        handlers.put(\"/\", new SynchronousRequestHandler());<br>" + 
+				"        handlers.put(<font color=\"#0000FF\">\"/\"</font>, new SynchronousRequestHandler());<br>" + 
 				"        HttpServer server = new HttpServer(new Application(handlers));<br>" +
 				"        server.listen(8080);<br>" +
 				"        IOLoop.INSTANCE.start();<br>" +
@@ -80,9 +79,9 @@ public class DocumentationTab extends TabItem {
 			    "        &#064;Override<br>" +
 			    "        &#064;Asynchronous<br>" +
 			    "        public void get(HttpRequest request, final HttpResponse response) {<br>" +
-			    "            response.write(\"hello \");<br>" + 
+			    "            response.write(<font color=\"#0000FF\">\"hello \"</font>);<br>" + 
 			    "            AsynchronousHttpClient client = new AsynchronousHttpClient();<br>" +
-			    "            client.fetch(\"http://tt.se/start/\",<br>" +
+			    "            client.fetch(<font color=\"#0000FF\">\"http://tt.se/start/\"</font>,<br>" +
 			    "                new AsyncResult&#060;HttpResponse&#062;() {<br>" +
 			    "                    public void onFailure(Throwable ignore) { }<br>" +
 			    "                    public void onSuccess(HttpResponse result) { response.write(result.getBody()).finish(); }<br>" +
@@ -92,7 +91,7 @@ public class DocumentationTab extends TabItem {
 			    "    }<br><br>" +
 			    "    public static void main(String[] args) {<br>" +
 			    "        Map&#060;String, RequestHandler&#062; handlers = new HashMap&#060;String, RequestHandler&#062;();<br>" +
-			    "        handlers.put(\"/\", new AsynchronousRequestHandler());<br>" +
+			    "        handlers.put(<font color=\"#0000FF\">\"/\"</font>, new AsynchronousRequestHandler());<br>" +
 			    "        HttpServer server = new HttpServer(new Application(handlers));<br>" +
 			    "        server.listen(8080);<br>" +
 			    "        IOLoop.INSTANCE.start();<br>" +
@@ -112,7 +111,7 @@ public class DocumentationTab extends TabItem {
 			    "    }<br><br>" +
 			    "    public static void main(String[] args) {<br>" +
 			    "        Map&#060;String, RequestHandler&#062; handlers = new HashMap&#060;String, RequestHandler&#062;();<br>" +
-			    "        handlers.put(\"/persons/([0-9]+)\", new CapturingRequestHandler());<br>" +
+			    "        handlers.put(<font color=\"#0000FF\">\"/persons/([0-9]+)\"</font>, new CapturingRequestHandler());<br>" +
 			    "        HttpServer server = new HttpServer(new Application(handlers));<br>" +
 			    "        server.listen(8080);<br>" +
 			    "        IOLoop.INSTANCE.start();<br>" +
@@ -128,7 +127,7 @@ public class DocumentationTab extends TabItem {
 			    "All logging in Deft is performed by Logback (SLF4J). Deft ships with a default Logback config file, in which all<br>" +
 			    "log-output is written to STDOUT. While this works fine for testing purposes, it is recommended to override this behaviour<br>" +
 			    "for \"real world scenarios\". This is done by creating your own logback config file and then specify the location of it<br>" + 
-			    "with a system property named <i>logback.configurationFile</i>. The value of this property can be a URL, a resource on the class path<br>" +
+			    "with a system property named <i>logback.configurationFile</i>. The value of this property can be a URL, a resource on the classpath<br>" +
 			    "or a path to a file external to the application.<br>"+
 			    "Example:<br><br>" +
 			    "<pre></code>    java -Dlogback.configurationFile=/path/to/config.xml com.my.DeftServer</pre></code>"+
@@ -149,8 +148,21 @@ public class DocumentationTab extends TabItem {
 				"<br>Each individual number (bar) is the median of five consecutive runs." +
 				"<br>The command executed (for both charts) was:<br><br>" +
 				"<pre><code>    ab -k -c[5, 10, 15, 20, 25] -n800000 http://127.0.0.1/</pre></code>" +
-				"<br>"
-		);
+				"<br>";
+		html = html.replaceAll(" public ", "<font color=\"#FF00FF\"> public </font>");
+		html = html.replaceAll(" class ", "<font color=\"#FF00FF\"> class </font>");
+		html = html.replaceAll("static", "<font color=\"#FF00FF\">static</font>");
+		html = html.replaceAll("void", "<font color=\"#FF00FF\">void</font>");
+		html = html.replaceAll(" extends ", "<font color=\"#FF00FF\"> extends </font>");
+		html = html.replaceAll("new", "<font color=\"#FF00FF\">new</font>");
+		html = html.replaceAll(" final ", "<font color=\"#FF00FF\"> final </font>");
+		
+		html = html.replaceAll("&#064;Override", "<font color=\"#808080\">&#064;Override</font>");
+		html = html.replaceAll("&#064;Asynchronous", "<font color=\"#808080\">&#064;Asynchronous</font>");
+		
+		html = html.replaceAll("INSTANCE", "<font color=\"#0000A0\">INSTANCE</font>");
+		
+		return new HTML(html);
 	}
 // nginx 0.8.52
 	// python 2.6.1
