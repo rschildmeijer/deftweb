@@ -68,7 +68,7 @@ public class DocumentationTab extends TabItem {
 				"    public static void main(String[] args) {<br>" +
 				"        -Map-&#060;String, -RequestHandler-&#062; handlers = new -HashMap-&#060;String, -RequestHandler-&#062;();<br>" +
 				"        handlers.put(<font color=\"#0000FF\">\"/\"</font>, new -SynchronousRequestHandler-());<br>" + 
-				"        .HttpServer. server = new .HttpServer.(new Application(handlers));<br>" +
+				"        -HttpServer- server = new -HttpServer-(new Application(handlers));<br>" +
 				"        server.listen(8080);<br>" +
 				"        IOLoop.INSTANCE.start();<br>" +
 				"    }<br>" +
@@ -92,7 +92,7 @@ public class DocumentationTab extends TabItem {
 			    "    public static void main(String[] args) {<br>" +
 			    "        -Map-&#060;String, -RequestHandler-&#062; handlers = new -HashMap-&#060;String, -RequestHandler-&#062;();<br>" +
 			    "        handlers.put(<font color=\"#0000FF\">\"/\"</font>, new AsynchronousRequestHandler());<br>" +
-			    "        .HttpServer. server = new .HttpServer.(new Application(handlers));<br>" +
+			    "        -HttpServer- server = new -HttpServer-(new Application(handlers));<br>" +
 			    "        server.listen(8080);<br>" +
 			    "        IOLoop.INSTANCE.start();<br>" +
 			    "    }<br>" +
@@ -112,7 +112,7 @@ public class DocumentationTab extends TabItem {
 			    "    public static void main(String[] args) {<br>" +
 			    "        -Map-&#060;String, -RequestHandler-&#062; handlers = new -HashMap-&#060;String, -RequestHandler-&#062;();<br>" +
 			    "        handlers.put(<font color=\"#0000FF\">\"/persons/([0-9]+)\"</font>, new -CapturingRequestHandler-());<br>" +
-			    "        .HttpServer. server = new .HttpServer.(new Application(handlers));<br>" +
+			    "        -HttpServer- server = new -HttpServer-(new Application(handlers));<br>" +
 			    "        server.listen(8080);<br>" +
 			    "        IOLoop.INSTANCE.start();<br>" +
 			    "    }<br>" +
@@ -149,25 +149,28 @@ public class DocumentationTab extends TabItem {
 				"<br>The command executed (for both charts) was:<br><br>" +
 				"<pre><code>    ab -k -c[5, 10, 15, 20, 25] -n800000 http://127.0.0.1/</pre></code>" +
 				"<br>";
+		
 		// keywords
-		html = html.replaceAll(" public ", "<font color=\"#FF00FF\"> public </font>");
-		html = html.replaceAll(" class ", "<font color=\"#FF00FF\"> class </font>");
-		html = html.replaceAll("static", "<font color=\"#FF00FF\">static</font>");
-		html = html.replaceAll("void", "<font color=\"#FF00FF\">void</font>");
-		html = html.replaceAll(" extends ", "<font color=\"#FF00FF\"> extends </font>");
-		html = html.replaceAll("new", "<font color=\"#FF00FF\">new</font>");
-		html = html.replaceAll(" final ", "<font color=\"#FF00FF\"> final </font>");
+		final String KEYWORDS = "#FF00FF";	//pink
+		html = html.replaceAll(" public ", "<font color=\"" + KEYWORDS + "\"> public </font>");
+		html = html.replaceAll(" class ", "<font color=\"" + KEYWORDS + "\"> class </font>");
+		html = html.replaceAll("static", "<font color=\"" + KEYWORDS + "\">static</font>");
+		html = html.replaceAll("void", "<font color=\"" + KEYWORDS + "\">void</font>");
+		html = html.replaceAll(" extends ", "<font color=\"" + KEYWORDS + "\"> extends </font>");
+		html = html.replaceAll("new", "<font color=\"" + KEYWORDS + "\">new</font>");
+		html = html.replaceAll(" final ", "<font color=\"" + KEYWORDS + "\"> final </font>");
 		
 		// annotations
-		html = html.replaceAll("&#064;Override", "<font color=\"#606060 \">&#064;Override</font>");
-		html = html.replaceAll("&#064;Asynchronous", "<font color=\"#606060 \">&#064;Asynchronous</font>");
+		final String ANNOTATIONS = "#606060";	// dark grey
+		html = html.replaceAll("&#064;Override", "<font color=\"" + ANNOTATIONS + "\">&#064;Override</font>");
+		html = html.replaceAll("&#064;Asynchronous", "<font color=\"" + ANNOTATIONS + "\">&#064;Asynchronous</font>");
 		
 		// static fields
-		html = html.replaceAll("INSTANCE", "<font color=\"#0000A0\">INSTANCE</font>");
+		final String STATIC_FIELDS = "#0000A0";	// dark blue
+		html = html.replaceAll("INSTANCE", "<font color=\"" + STATIC_FIELDS + "\">INSTANCE</font>");
 		
 		// class names
-		//CC0000
-		final String CLASS_NAMES = "#CC0000";
+		final String CLASS_NAMES = "#CC0000";	// red
 		html = html.replaceAll("String", "<font color=\"" + CLASS_NAMES + "\">String</font>");
 		html = html.replaceAll("-SynchronousRequestHandler-", "<font color=\"" + CLASS_NAMES + "\">SynchronousRequestHandler</font>");
 		html = html.replaceAll("-RequestHandler-", "<font color=\"" + CLASS_NAMES + "\">RequestHandler</font>");
@@ -175,7 +178,7 @@ public class DocumentationTab extends TabItem {
 		html = html.replaceAll(".HttpResponse.", "<font color=\"" + CLASS_NAMES + "\">HttpResponse</font>");
 		html = html.replaceAll("-Map-", "<font color=\"" + CLASS_NAMES + "\">Map</font>");
 		html = html.replaceAll("-HashMap-", "<font color=\"" + CLASS_NAMES + "\">HashMap</font>");
-		html = html.replaceAll(".HttpServer.", "<font color=\"" + CLASS_NAMES + "\">HttpServer</font>");
+		html = html.replaceAll("-HttpServer-", "<font color=\"" + CLASS_NAMES + "\">HttpServer</font>");
 		html = html.replaceAll("Application", "<font color=\"" + CLASS_NAMES + "\">Application</font>");
 		html = html.replaceAll("IOLoop", "<font color=\"" + CLASS_NAMES + "\">IOLoop</font>");
 		html = html.replaceAll("-CapturingRequestHandler-", "<font color=\"" + CLASS_NAMES + "\">CapturingRequestHandler</font>");
