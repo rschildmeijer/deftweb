@@ -58,41 +58,41 @@ public class DocumentationTab extends TabItem {
 				"</code></pre><br>" +
 				"<h3>Hello world (synchronous)</h3>" +
 				"<pre><code>" +
-				"    class -SynchronousRequestHandler- extends -RequestHandler- {<br><br>" +
+				"    class SynchronousRequestHandler extends RequestHandler {<br><br>" +
 				"        &#064;Override<br>" +
-				"        public void get(HttpRequest request, .HttpResponse. response) {<br>" +
+				"        public void get(HttpRequest request, HttpResponse response) {<br>" +
                 "            response.write(<font color=\"#0000FF\">\"hello world!\"</font>);<br>" +
     			"        }<br>"+
 				"    }<br>" +
 				"<br>" +
 				"    public static void main(String[] args) {<br>" +
-				"        -Map-&#060;String, -RequestHandler-&#062; handlers = new -HashMap-&#060;String, -RequestHandler-&#062;();<br>" +
-				"        handlers.put(<font color=\"#0000FF\">\"/\"</font>, new -SynchronousRequestHandler-());<br>" + 
-				"        -HttpServer- server = new -HttpServer-(new Application(handlers));<br>" +
+				"        Map&#060;String, RequestHandler&#062; handlers = new HashMap&#060;String, RequestHandler&#062;();<br>" +
+				"        handlers.put(<font color=\"#0000FF\">\"/\"</font>, new SynchronousRequestHandler());<br>" + 
+				"        HttpServer server = new HttpServer(new Application(handlers));<br>" +
 				"        server.listen(8080);<br>" +
 				"        IOLoop.INSTANCE.start();<br>" +
 				"    }<br>" +
 				"</pre></code>" +
 				"<br><h3>Hello world (asynchronous)</h3>"+ 
 				"<pre><code>" +
-			    "    class AsynchronousRequestHandler extends -RequestHandler- {<br><br>" +
+			    "    class AsynchronousRequestHandler extends RequestHandler {<br><br>" +
 			    "        &#064;Override<br>" +
 			    "        &#064;Asynchronous<br>" +
-			    "        public void get(HttpRequest request, final .HttpResponse. response) {<br>" +
+			    "        public void get(HttpRequest request, final HttpResponse response) {<br>" +
 			    "            response.write(<font color=\"#0000FF\">\"hello \"</font>);<br>" + 
 			    "            AsynchronousHttpClient client = new AsynchronousHttpClient();<br>" +
 			    "            client.fetch(<font color=\"#0000FF\">\"http://tt.se/start/\"</font>,<br>" +
-			    "                new AsyncResult&#060;.HttpResponse.&#062;() {<br>" +
+			    "                new AsyncResult&#060;HttpResponse&#062;() {<br>" +
 			    "                    public void onFailure(Throwable ignore) { }<br>" +
-			    "                    public void onSuccess(.HttpResponse. result) { response.write(result.getBody()).finish(); }<br>" +
+			    "                    public void onSuccess(HttpResponse result) { response.write(result.getBody()).finish(); }<br>" +
 			    "                }<br>" +
 			    "            );<br>" +
 			    "        }<br>" +
 			    "    }<br><br>" +
 			    "    public static void main(String[] args) {<br>" +
-			    "        -Map-&#060;String, -RequestHandler-&#062; handlers = new -HashMap-&#060;String, -RequestHandler-&#062;();<br>" +
+			    "        Map&#060;String, RequestHandler&#062; handlers = new HashMap&#060;String, RequestHandler&#062;();<br>" +
 			    "        handlers.put(<font color=\"#0000FF\">\"/\"</font>, new AsynchronousRequestHandler());<br>" +
-			    "        -HttpServer- server = new -HttpServer-(new Application(handlers));<br>" +
+			    "        HttpServer server = new HttpServer(new Application(handlers));<br>" +
 			    "        server.listen(8080);<br>" +
 			    "        IOLoop.INSTANCE.start();<br>" +
 			    "    }<br>" +
@@ -103,16 +103,16 @@ public class DocumentationTab extends TabItem {
 			    "the request is still open, and the response is finally flushed to the client with the call to response.finish()." +
 			    "<br><br><h3>Capturing groups with regular expressions</h3>" +
 			    "<pre><code>" +
-			    "    class -CapturingRequestHandler- extends -RequestHandler- {<br><br>" +
+			    "    class CapturingRequestHandler extends RequestHandler {<br><br>" +
 			    "        &#064;Override<br>" +
-			    "        public void get(HttpRequest request, .HttpResponse. response) {<br>" +
+			    "        public void get(HttpRequest request, HttpResponse response) {<br>" +
 			    "            response.write(request.getRequestedPath());<br>" +
 			    "        }<br>" + 
 			    "    }<br><br>" +
 			    "    public static void main(String[] args) {<br>" +
-			    "        -Map-&#060;String, -RequestHandler-&#062; handlers = new -HashMap-&#060;String, -RequestHandler-&#062;();<br>" +
-			    "        handlers.put(<font color=\"#0000FF\">\"/persons/([0-9]+)\"</font>, new -CapturingRequestHandler-());<br>" +
-			    "        -HttpServer- server = new -HttpServer-(new Application(handlers));<br>" +
+			    "        Map&#060;String, RequestHandler&#062; handlers = new HashMap&#060;String, RequestHandler&#062;();<br>" +
+			    "        handlers.put(<font color=\"#0000FF\">\"/persons/([0-9]+)\"</font>, new CapturingRequestHandler());<br>" +
+			    "        HttpServer server = new HttpServer(new Application(handlers));<br>" +
 			    "        server.listen(8080);<br>" +
 			    "        IOLoop.INSTANCE.start();<br>" +
 			    "    }<br>" +
@@ -151,7 +151,9 @@ public class DocumentationTab extends TabItem {
 				"<br>";
 		
 		// keywords
-		final String KEYWORDS = "#FF00FF";	//pink
+		//final String KEYWORDS = "#FF00FF";	//pink
+//		final String KEYWORDS = "#7E354D";	//Pale Violet Red4
+		final String KEYWORDS = "#810541";	//Maroon
 		html = html.replaceAll(" public ", "<font color=\"" + KEYWORDS + "\"> public </font>");
 		html = html.replaceAll(" class ", "<font color=\"" + KEYWORDS + "\"> class </font>");
 		html = html.replaceAll("static", "<font color=\"" + KEYWORDS + "\">static</font>");
@@ -161,7 +163,7 @@ public class DocumentationTab extends TabItem {
 		html = html.replaceAll(" final ", "<font color=\"" + KEYWORDS + "\"> final </font>");
 		
 		// annotations
-		final String ANNOTATIONS = "#606060";	// dark grey
+		final String ANNOTATIONS = "#6E6E6E";	// dark grey
 		html = html.replaceAll("&#064;Override", "<font color=\"" + ANNOTATIONS + "\">&#064;Override</font>");
 		html = html.replaceAll("&#064;Asynchronous", "<font color=\"" + ANNOTATIONS + "\">&#064;Asynchronous</font>");
 		
@@ -170,22 +172,22 @@ public class DocumentationTab extends TabItem {
 		html = html.replaceAll("INSTANCE", "<font color=\"" + STATIC_FIELDS + "\">INSTANCE</font>");
 		
 		// class names
-		final String CLASS_NAMES = "#CC0000";	// red
-		html = html.replaceAll("String", "<font color=\"" + CLASS_NAMES + "\">String</font>");
-		html = html.replaceAll("-SynchronousRequestHandler-", "<font color=\"" + CLASS_NAMES + "\">SynchronousRequestHandler</font>");
-		html = html.replaceAll("-RequestHandler-", "<font color=\"" + CLASS_NAMES + "\">RequestHandler</font>");
-		html = html.replaceAll("HttpRequest", "<font color=\"" + CLASS_NAMES + "\">HttpRequest</font>");
-		html = html.replaceAll(".HttpResponse.", "<font color=\"" + CLASS_NAMES + "\">HttpResponse</font>");
-		html = html.replaceAll("-Map-", "<font color=\"" + CLASS_NAMES + "\">Map</font>");
-		html = html.replaceAll("-HashMap-", "<font color=\"" + CLASS_NAMES + "\">HashMap</font>");
-		html = html.replaceAll("-HttpServer-", "<font color=\"" + CLASS_NAMES + "\">HttpServer</font>");
-		html = html.replaceAll("Application", "<font color=\"" + CLASS_NAMES + "\">Application</font>");
-		html = html.replaceAll("IOLoop", "<font color=\"" + CLASS_NAMES + "\">IOLoop</font>");
-		html = html.replaceAll("-CapturingRequestHandler-", "<font color=\"" + CLASS_NAMES + "\">CapturingRequestHandler</font>");
-		html = html.replaceAll("AsynchronousRequestHandler", "<font color=\"" + CLASS_NAMES + "\">AsynchronousRequestHandler</font>");
-		html = html.replaceAll("AsynchronousHttpClient", "<font color=\"" + CLASS_NAMES + "\">AsynchronousHttpClient</font>");
-		html = html.replaceAll("AsyncResult", "<font color=\"" + CLASS_NAMES + "\">AsyncResult</font>");
-		html = html.replaceAll("Throwable", "<font color=\"" + CLASS_NAMES + "\">Throwable</font>");
+//		final String CLASS_NAMES = "#CC0000";	// red
+//		html = html.replaceAll("String", "<font color=\"" + CLASS_NAMES + "\">String</font>");
+//		html = html.replaceAll("-SynchronousRequestHandler-", "<font color=\"" + CLASS_NAMES + "\">SynchronousRequestHandler</font>");
+//		html = html.replaceAll("-RequestHandler-", "<font color=\"" + CLASS_NAMES + "\">RequestHandler</font>");
+//		html = html.replaceAll("HttpRequest", "<font color=\"" + CLASS_NAMES + "\">HttpRequest</font>");
+//		html = html.replaceAll(".HttpResponse.", "<font color=\"" + CLASS_NAMES + "\">HttpResponse</font>");
+//		html = html.replaceAll("-Map-", "<font color=\"" + CLASS_NAMES + "\">Map</font>");
+//		html = html.replaceAll("-HashMap-", "<font color=\"" + CLASS_NAMES + "\">HashMap</font>");
+//		html = html.replaceAll("-HttpServer-", "<font color=\"" + CLASS_NAMES + "\">HttpServer</font>");
+//		html = html.replaceAll("Application", "<font color=\"" + CLASS_NAMES + "\">Application</font>");
+//		html = html.replaceAll("IOLoop", "<font color=\"" + CLASS_NAMES + "\">IOLoop</font>");
+//		html = html.replaceAll("-CapturingRequestHandler-", "<font color=\"" + CLASS_NAMES + "\">CapturingRequestHandler</font>");
+//		html = html.replaceAll("AsynchronousRequestHandler", "<font color=\"" + CLASS_NAMES + "\">AsynchronousRequestHandler</font>");
+//		html = html.replaceAll("AsynchronousHttpClient", "<font color=\"" + CLASS_NAMES + "\">AsynchronousHttpClient</font>");
+//		html = html.replaceAll("AsyncResult", "<font color=\"" + CLASS_NAMES + "\">AsyncResult</font>");
+//		html = html.replaceAll("Throwable", "<font color=\"" + CLASS_NAMES + "\">Throwable</font>");
 
 		return new HTML(html);
 	}
